@@ -16,11 +16,11 @@ mes(janeiro).
 mes(maio).
 mes(setembro).
 
-jogo(tres_ou_mais).
 jogo(caca_palavras).
 jogo(cubo_vermelho).
 jogo(jogo_da_forca).
 jogo(prob_logica).
+jogo(tres_ou_mais).
 
 materia(biologia).
 materia(geografia).
@@ -33,6 +33,18 @@ suco(limao).
 suco(maracuja).
 suco(morango).
 suco(uva).
+
+alldifferent([]).
+alldifferent([H|T]) :- 
+    not(member(H, T)), 
+    alldifferent(T).
+
+imprime_lista([]) :- 
+    write('\n\n FIM do imprime_lista \n').
+imprime_lista([H|T]) :-
+    write('\n......................................\n'),
+    write(H), write(' : '),
+    imprime_lista(T).
 
 exatamente_a_esquerda(X, Y, [X, Y | _]).
 exatamente_a_esquerda(X, Y, [_ | Resto]) :- 
@@ -53,17 +65,17 @@ no_canto(X, [_, _, _, _, X]).
 
 modelo(Solucao) :-
     Solucao = [
-        (Mochila1, Nome1, Mes1, Jogo1, Materia1, Suco1),
-        (Mochila2, Nome2, Mes2, Jogo2, Materia2, Suco2),
-        (Mochila3, Nome3, Mes3, Jogo3, Materia3, Suco3),
-        (Mochila4, Nome4, Mes4, Jogo4, Materia4, Suco4),
-        (Mochila5, Nome5, Mes5, Jogo5, Materia5, Suco5)
+        (Mochila_1, Nome_1, Mes_1, Jogo_1, Materia_1, Suco_1),
+        (Mochila_2, Nome_2, Mes_2, Jogo_2, Materia_2, Suco_2),
+        (Mochila_3, Nome_3, Mes_3, Jogo_3, Materia_3, Suco_3),
+        (Mochila_4, Nome_4, Mes_4, Jogo_4, Materia_4, Suco_4),
+        (Mochila_5, Nome_5, Mes_5, Jogo_5, Materia_5, Suco_5)
     ],
 
-    Suco1 = limao, 
-    Suco3 = morango, 
-    Jogo3 = jogo_da_forca, 
-    Nome5 = lenin,
+    Suco_1 = limao, 
+    Suco_3 = morango, 
+    Jogo_3 = jogo_da_forca, 
+    Nome_5 = lenin,
 
     member((_, joao, _, _, historia, _), Solucao), 
     member((_, _, _, prob_logica, _, uva), Solucao), 
@@ -85,34 +97,23 @@ modelo(Solucao) :-
     ao_lado((_, _, _, jogo_da_forca, _, _), (vermelha, _, _, _, _, _), Solucao), 
     no_canto((_, otavio, _, _, _, _), Solucao),
 
-    mochila(Mochila1), mochila(Mochila2), mochila(Mochila3), mochila(Mochila4), mochila(Mochila5),
-    alldifferent([Mochila1, Mochila2, Mochila3, Mochila4, Mochila5]),
+    mochila(Mochila_1), mochila(Mochila_2), mochila(Mochila_3), mochila(Mochila_4), mochila(Mochila_5),
+    alldifferent([Mochila_1, Mochila_2, Mochila_3, Mochila_4, Mochila_5]),
 
-    nome(Nome1), nome(Nome2), nome(Nome3), nome(Nome4), nome(Nome5),
-    alldifferent([Nome1, Nome2, Nome3, Nome4, Nome5]),
+    nome(Nome_1), nome(Nome_2), nome(Nome_3), nome(Nome_4), nome(Nome_5),
+    alldifferent([Nome_1, Nome_2, Nome_3, Nome_4, Nome_5]),
 
-    mes(Mes1), mes(Mes2), mes(Mes3), mes(Mes4), mes(Mes5),
-    alldifferent([Mes1, Mes2, Mes3, Mes4, Mes5]),
+    mes(Mes_1), mes(Mes_2), mes(Mes_3), mes(Mes_4), mes(Mes_5),
+    alldifferent([Mes_1, Mes_2, Mes_3, Mes_4, Mes_5]),
 
-    jogo(Jogo1), jogo(Jogo2), jogo(Jogo3), jogo(Jogo4), jogo(Jogo5),
-    alldifferent([Jogo1, Jogo2, Jogo3, Jogo4, Jogo5]),
+    jogo(Jogo_1), jogo(Jogo_2), jogo(Jogo_3), jogo(Jogo_4), jogo(Jogo_5),
+    alldifferent([Jogo_1, Jogo_2, Jogo_3, Jogo_4, Jogo_5]),
 
-    materia(Materia1), materia(Materia2), materia(Materia3), materia(Materia4), materia(Materia5),
-    alldifferent([Materia1, Materia2, Materia3, Materia4, Materia5]),
+    materia(Materia_1), materia(Materia_2), materia(Materia_3), materia(Materia_4), materia(Materia_5),
+    alldifferent([Materia_1, Materia_2, Materia_3, Materia_4, Materia_5]),
 
-    suco(Suco1), suco(Suco2), suco(Suco3), suco(Suco4), suco(Suco5),
-    alldifferent([Suco1, Suco2, Suco3, Suco4, Suco5]).
-
-alldifferent([]).
-alldifferent([H|T]) :- 
-    not(member(H, T)),
-    alldifferent(T).
-
-imprime_lista([]) :- write('\n\n FIM do imprime_lista \n').
-imprime_lista([H|T]) :-
-    write('\n......................................\n'),
-    write(H), write(' : '),
-    imprime_lista(T).
+    suco(Suco_1), suco(Suco_2), suco(Suco_3), suco(Suco_4), suco(Suco_5),
+    alldifferent([Suco_1, Suco_2, Suco_3, Suco_4, Suco_5]).
 
 main :-
     statistics(cputime, T1),
